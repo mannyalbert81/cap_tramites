@@ -307,32 +307,9 @@ public function index(){
     			$resultado=$sesiones->Insert();
     			
     			
-    			
-    			$documentos = new DocumentosLegalModel();
-    			$columnas = "categorias.nombre_categorias, COUNT(documentos_legal.id_documentos_legal) AS cantidad";
-    			$tablas   = "public.documentos_legal, public.categorias, public.subcategorias";
-    			$where    = "categorias.id_categorias = subcategorias.id_categorias AND subcategorias.id_subcategorias = documentos_legal.id_subcategorias
-	                   GROUP BY categorias.nombre_categorias";
-    			$id = "categorias.nombre_categorias ";
-    			
-    			
-    			$resultSumarDocumentosCategorias = $documentos->getCondiciones($columnas ,$tablas ,$where, $id);
-    			
-    			
-    			
-    			
-    			
-    			$documentos = new DocumentosLegalModel();
-    			$columnas = "subcategorias.nombre_subcategorias, COUNT(documentos_legal.id_documentos_legal) AS cantidad";
-    			$tablas   = "public.documentos_legal, public.categorias, public.subcategorias";
-    			$where    = "categorias.id_categorias = subcategorias.id_categorias AND subcategorias.id_subcategorias = documentos_legal.id_subcategorias
-	                   GROUP BY subcategorias.nombre_subcategorias";
-    			$id = "subcategorias.nombre_subcategorias ";
-    			
-    			
-    			$resultSumarDocumentosSubcategorias = $documentos->getCondiciones($columnas ,$tablas ,$where, $id);
-    			
-    			
+    			$resultSumarDocumentosCategorias = 0;
+    			$resultSumarDocumentosSubcategorias = 0;
+    				
     		    $this->view("Bienvenida",array(
     		        "allusers"=>$_usuario , "resultSumarDocumentosCategorias"=>$resultSumarDocumentosCategorias, "resultSumarDocumentosSubcategorias"=>$resultSumarDocumentosSubcategorias
 	    		));
