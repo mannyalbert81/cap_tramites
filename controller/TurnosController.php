@@ -99,8 +99,13 @@ class TurnosController extends ControladorBase{
 		        	    $departamentos->UpdateBy("consecutivo_departamentos = consecutivo_departamentos+1", "departamentos", "id_departamentos = '$_id_departamentos'");
 		        	
 		        	
-		        	
-		        	
+		        	    
+		        	    $columnas ="";
+		        	    $tablas = "";
+		        	    $where = "";
+		        	    $id="";
+		        	    
+		        	    
 		        	    
 		        	    
 		        	    
@@ -110,269 +115,27 @@ class TurnosController extends ControladorBase{
 		        	    $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 		        	    $fechaactual=$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
 		        	    
-		        	    $directorio = $_SERVER ['DOCUMENT_ROOT'] . '/aguafacturacion';
+		        	    $directorio = $_SERVER ['DOCUMENT_ROOT'] . '/cap_tramites';
 		        	    $dom=$directorio.'/view/dompdf/dompdf_config.inc.php';
-		        	    $domLogo=$directorio.'/view/images/agua.png';
-		        	    $logo = '<img src="'.$domLogo.'" alt="Responsive image" width="130" height="70">';
+		        	    $domLogo=$directorio.'/view/images/logo.png';
+		        	    $logo = '<img src="'.$domLogo.'" alt="Responsive image" width="80" height="45">';
 		        	    
-		        	    
-		        	    
-		        	    $columnas = "solicitudes.id_solicitudes,
-								  clientes.id_clientes,
-								  clientes.razon_social_clientes,
-								  clientes.id_tipo_identificacion,
-								  clientes.id_tipo_persona,
-								  clientes.identificacion_clientes,
-								  tipo_consumo.id_tipo_consumo,
-								  tipo_consumo.nombre_tipo_consumo,
-								  solicitudes.numero_factura,
-						          tipo_persona.nombre_tipo_persona,
-						          tipo_identificacion.nombre_tipo_identificacion,
-						          solicitudes.fecha_registro,
-						          solicitudes.id_estado,
-						          solicitudes.id_usuarios_registra,
-						          solicitudes.id_usuarios_aprueba";
-		        	    
-		        	    $tablas   = "public.solicitudes,
-									  public.clientes,
-									  public.tipo_consumo,
-						              public.tipo_identificacion,
-						              public.tipo_persona";
-		        	    
-		        	    $id       = "solicitudes.id_solicitudes";
-		        	    
-		        	    
-		        	    $where    = " tipo_identificacion.id_tipo_identificacion =clientes.id_tipo_identificacion AND tipo_persona.id_tipo_persona= clientes.id_tipo_persona AND solicitudes.id_tipo_consumo = tipo_consumo.id_tipo_consumo AND
-		    				clientes.id_clientes = solicitudes.id_clientes AND solicitudes.id_solicitudes='$_id_solicitudes' AND clientes.id_clientes = '$_id_clientes' ";
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    $resultSetCabeza=$solicitudes->getCondiciones($columnas, $tablas, $where, $id);
-		        	    
-		        	    
-		        	    $usuarios = new UsuariosModel();
-		        	    
-		        	    
-		        	    $_id_usuarios_registra=0;
-		        	    $_id_usuarios_aprueba=0;
-		        	    $_nombre_usuarios_registra="";
-		        	    $_nombre_usuarios_aprueba="";
-		        	    
-		        	    
-		        	    if(!empty($resultSetCabeza)){
-		        	        
-		        	        
-		        	        
-		        	        $numero_solicitudes     =$resultSetCabeza[0]->numero_factura;
-		        	        $_nombre_tipo_persona       =$resultSetCabeza[0]->nombre_tipo_persona;
-		        	        $_nombre_tipo_identificacion   =$resultSetCabeza[0]->nombre_tipo_identificacion;
-		        	        $_razon_social_clientes   =$resultSetCabeza[0]->razon_social_clientes;
-		        	        $_identificacion_clientes =$resultSetCabeza[0]->identificacion_clientes;
-		        	        $_nombre_tipo_consumo =$resultSetCabeza[0]->nombre_tipo_consumo;
-		        	        $_id_estado	=$resultSetCabeza[0]->id_estado;
-		        	        $_id_usuarios_registra =$resultSetCabeza[0]->id_usuarios_registra;
-		        	        $_id_usuarios_aprueba =$resultSetCabeza[0]->id_usuarios_aprueba;
-		        	        
-		        	        $_fecha_registro          =date("d/m/Y", strtotime($resultSetCabeza[0]->fecha_registro));
-		        	        $_fecha_registro=$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
-		        	        
-		        	        
-		        	        if($_id_usuarios_registra>0){
-		        	            
-		        	            $resultUsuReg= $usuarios->getBy("id_usuarios='$_id_usuarios_registra'");
-		        	            $_nombre_usuarios_registra=$resultUsuReg[0]->nombre_usuarios;
-		        	            
-		        	        }else{
-		        	            
-		        	            $_nombre_usuarios_registra="";
-		        	        }
-		        	        
-		        	        
-		        	        
-		        	        
-		        	        if($_id_usuarios_aprueba>0){
-		        	            
-		        	            $resultUsuAprue= $usuarios->getBy("id_rol='47'");
-		        	            $_nombre_usuarios_aprueba=$resultUsuAprue[0]->nombre_usuarios;
-		        	            
-		        	        }else{
-		        	            
-		        	            $_nombre_usuarios_aprueba="";
-		        	        }
-		        	        
-		        	        
-		        	        $columnas1 = "solicitudes_detalle.id_solicitudes_detalle,
-									  solicitudes_detalle.id_solicitudes,
-									  tarifas.id_tarifas,
-									  tarifas.nombre_tarifa,
-							          tarifas.valor_tarifa";
-		        	        
-		        	        $tablas1   = " public.tarifas,
-  										public.solicitudes_detalle";
-		        	        
-		        	        $id1       = "solicitudes_detalle.id_solicitudes_detalle";
-		        	        
-		        	        
-		        	        $where1    = " solicitudes_detalle.id_tarifas = tarifas.id_tarifas AND solicitudes_detalle.id_solicitudes='$_id_solicitudes' ";
-		        	        
-		        	        $resultSetDetalle=$solicitides_detalle->getCondiciones($columnas1, $tablas1, $where1, $id1);
-		        	        
-		        	        
-		        	        $html.='<p style="text-align: right;">'.$logo.'<hr style="height: 2px; background-color: black;"></p>';
-		        	        $html.='<p style="text-align: right; font-size: 13px;"><b>Fecha Factura:</b> '.$fechaactual.'</p>';
-		        	        $html.='<p style="text-align: center; font-size: 16px; margin-top:60px;"><b>Factura No. '.$numero_solicitudes.'</b></p>';
-		        	        
-		        	        
-		        	        $html.='<table style="width: 100%; margin-top:30px;">';
-		        	        
+		        	     
+		        	        $html.='<table style="width: 100%;">';
 		        	        $html.='<tr>';
-		        	        $html.='<th colspan="2" style="text-align:left; font-size: 13px;">Tipo Persona</th>';
-		        	        $html.='<th colspan="2" style="text-align:left; font-size: 13px;">Tipo Identificación</th>';
-		        	        $html.='<th colspan="2" style="text-align:left; font-size: 13px;">Identificación</th>';
-		        	        $html.='<th colspan="4" style="text-align:left; font-size: 13px;">Razón Social</th>';
-		        	        $html.='<th colspan="2" style="text-align:left; font-size: 13px;">Tipo Consumo</th>';
-		        	        $html.='<th colspan="2" style="text-align:left; font-size: 13px;">Estado Solicitud</th>';
+		        	        $html.='<th colspan="12" style="text-align:center;">'.$domLogo.'</th>';
+		        	        $html.='<th colspan="12" style="text-align:center;">'.$domLogo.'</th>';
 		        	        $html.='</tr>';
+		        	        $html.='</table">';
+		        	       
 		        	        
-		        	        $html.='<tr>';
-		        	        
-		        	        $html.='<td colspan="2" style="text-align:left; font-size: 13px;">'.$_nombre_tipo_persona.'</td>';
-		        	        $html.='<td colspan="2" style="text-align:left; font-size: 13px;">'.$_nombre_tipo_identificacion.'</td>';
-		        	        $html.='<td colspan="2" style="text-align:left; font-size: 13px;">'.$_identificacion_clientes.'</td>';
-		        	        $html.='<td colspan="4" style="text-align:left; font-size: 13px;">'.$_razon_social_clientes.'</td>';
-		        	        $html.='<td colspan="2" style="text-align:left; font-size: 13px;">'.$_nombre_tipo_consumo.'</td>';
-		        	        
-		        	        if($_id_estado==3){
-		        	            $html.='<td colspan="2" style="text-align:left; font-size: 13px;">Pendiente</td>';
-		        	        }else if($_id_estado==2){
-		        	            $html.='<td colspan="2" style="text-align:left; font-size: 13px;">Anulada</td>';
-		        	        }else {
-		        	            $html.='<td colspan="2" style="text-align:left; font-size: 13px;">Aprobada</td>';
-		        	        }
-		        	        
-		        	        $html.='</tr>';
-		        	        $html.='</table>';
-		        	        
-		        	        
-		        	        if(!empty($resultSetDetalle)){
-		        	            
-		        	            
-		        	            
-		        	            $html.= "<table style='width: 100%; margin-top:40px;' border=1 cellspacing=0>";
-		        	            $html.= "<thead>";
-		        	            $html.= "<tr>";
-		        	            $html.='<th style="text-align: left;  font-size: 13px;">Descripción</th>';
-		        	            $html.='<th style="text-align: left;  font-size: 13px;">Cantidad</th>';
-		        	            $html.='<th style="text-align: left;  font-size: 13px;">Valor C/U</th>';
-		        	            $html.='<th style="text-align: left;  font-size: 13px;">Valor Total</th>';
-		        	            $html.='</tr>';
-		        	            $html.='</thead>';
-		        	            $html.='<tbody>';
-		        	            
-		        	            $i=0;
-		        	            $i=0; $valor_total_db=0; $valor_total_vista=0;
-		        	            
-		        	            foreach ($resultSetDetalle as $res)
-		        	            {
-		        	                $valor_total_db=$res->valor_tarifa;
-		        	                $valor_total_vista=$valor_total_vista+$valor_total_db;
-		        	                
-		        	                
-		        	                $i++;
-		        	                $html.='<tr>';
-		        	                $html.='<td style="font-size: 11px;">'.$res->nombre_tarifa.'</td>';
-		        	                $html.='<td style="font-size: 11px;">1</td>';
-		        	                $html.='<td style="font-size: 11px;">'.$res->valor_tarifa.'</td>';
-		        	                $html.='<td style="font-size: 11px;">'.$res->valor_tarifa.'</td>';
-		        	                $html.='</tr>';
-		        	                
-		        	                $valor_total_db=0;
-		        	            }
-		        	            
-		        	            $valor_total_vista= number_format($valor_total_vista, 2, '.', ',');
-		        	            
-		        	            
-		        	            $html.='<tr>';
-		        	            $html.='<td class="text-right" colspan=2></td>';
-		        	            $html.='<td class="text-right" colspan=1 style="font-size: 11px;"><b>SubTotal</b></td>';
-		        	            $html.='<td class="text-left" style="font-size: 12px;">'.$valor_total_vista.'</td>';
-		        	            $html.='</tr>';
-		        	            
-		        	            $valor_iva=0; $valor_iva=$valor_total_vista*0.12;
-		        	            $valor_iva= number_format($valor_iva, 2, '.', ',');
-		        	            
-		        	            
-		        	            $html.='<tr>';
-		        	            $html.='<td class="text-right" colspan=2></td>';
-		        	            $html.='<td class="text-right" colspan=1 style="font-size: 11px;"><b>Iva 12%</b></td>';
-		        	            $html.='<td class="text-left" style="font-size: 11px;">'.$valor_iva.'</td>';
-		        	            $html.='</tr>';
-		        	            
-		        	            $valor_FIN=0; $valor_FIN=$valor_total_vista+$valor_iva;
-		        	            $valor_FIN= number_format($valor_FIN, 2, '.', ',');
-		        	            
-		        	            $html.='<tr>';
-		        	            $html.='<td class="text-right" colspan=2></td>';
-		        	            $html.='<td class="text-right" colspan=1 style="font-size: 11px;"><b>TOTAL $</b></td>';
-		        	            $html.='<td class="text-right" style="font-size: 11px;">'.$valor_FIN.'</td>';
-		        	            
-		        	            $html.='</tr>';
-		        	            
-		        	            
-		        	            
-		        	            
-		        	            $html.='</tbody>';
-		        	            $html.='</table>';
-		        	            
-		        	            
-		        	        }
-		        	        
-		        	        
-		        	        $html.='<table style="width: 100%; margin-top:40px;">';
-		        	        
-		        	        $html.='<tr>';
-		        	        $html.='<th colspan="4" style="text-align:left; font-size: 13px;">Cajero</th>';
-		        	        $html.='<th colspan="4" style="text-align:left; font-size: 13px;"></th>';
-		        	        $html.='<th colspan="2" style="text-align:left; font-size: 13px;"></th>';
-		        	        $html.='<th colspan="2" style="text-align:left; font-size: 13px;"></th>';
-		        	        $html.='</tr>';
-		        	        
-		        	        $html.='<tr>';
-		        	        
-		        	        $html.='<td colspan="4" style="text-align:left; font-size: 13px;">'.$_nombre_usuarios_aprueba.'</td>';
-		        	        $html.='<td colspan="4" style="text-align:left; font-size: 13px;"></td>';
-		        	        $html.='<td colspan="2" style="text-align:left; font-size: 13px;"></td>';
-		        	        $html.='<td colspan="2" style="text-align:left; font-size: 13px;"></td>';
-		        	        
-		        	        $html.='</tr>';
-		        	        $html.='</table>';
-		        	        
+		        	        $this->report("Turno",array( "resultSet"=>$html));
+		        	        die();
 		        	        
 		        	    }
 		        	    
 		        	    
-		        	    $this->report("Factura",array( "resultSet"=>$html, "numero_solicitudes"=>$numero_solicitudes));
-		        	    die();
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	    
-		        	
-		        	
-		        	
-		        	}
-		        	
+		        	    $this->redirect("Turnos", "index");
 		        	
 		        	
 		  }
