@@ -41,9 +41,9 @@ $controladores=$_SESSION['controladores'];
                       <li style="<?php echo getcontrolador("Carton",$controladores) ?>"><a href="index.php?controller=RegistroCartonDocumentos&action=index">Registro de Cartones</a></li>
                     </ul>
                   </li>
-                  <li style="<?php echo getcontrolador("MenuDocumentos",$controladores) ?>"><a><i class="fa fa-edit"></i> Gestión Documental <span class="fa fa-chevron-down"></span></a>
+                  <li style="<?php echo getcontrolador("MenuProcesos",$controladores) ?>"><a><i class="fa fa-edit"></i> Procesos <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li style="<?php echo getcontrolador("Documentos",$controladores) ?>"><a href="index.php?controller=Documentos&action=index">Búsqueda de Documentos</a></li>
+                      <li style="<?php echo getcontrolador("Pantalla",$controladores) ?>"><a href="index.php?controller=Pantalla&action=index">Pantalla</a></li>
                       
                     </ul>
                   </li>
