@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>IndexDocument! | </title>
+    <title>Capremci </title>
 
     <!-- Bootstrap -->
     <link href="view/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -54,27 +54,15 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count">
-            <div id='contar_user'></div>
-            <div id='contar_documentos'></div>
-            <div id='sumar_paginas'></div>
-            <div id='contar_cartones'></div>
-            <div id='sumar_sesiones'></div>
-            
-          </div>
-        </div>
-          <!-- /top tiles -->
-
-
-          <br />
-
-	
-                <!-- End to do list -->
-
-                <!-- end of weather widget -->
-              
+                
+                
+                     <!-- page content -->
+    <div class="right_col" role="main">        
+           
+    <div class="container">
+    
+                
+                     
             
           </div>
         </div>
@@ -83,7 +71,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            POWERED BY -  Soluciones informáticas MASOFT  <a href="http://www.masoft.net">Colorlib</a>
+            Capremci - 2019  <a href="http://www.capremci.com.ec">www.capremci.com.ec</a>
           </div>
           <div class="clearfix"></div>
         </footer>

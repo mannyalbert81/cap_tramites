@@ -38,7 +38,7 @@ class TramitesDepartamentosModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="TramitesDepartamentos";
+		$this->table="tramites_departamentos";
 		
 		parent::__construct($this->table);
 	}

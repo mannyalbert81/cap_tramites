@@ -306,12 +306,9 @@ public function index(){
     			
     			$resultado=$sesiones->Insert();
     			
-    			
-    			$resultSumarDocumentosCategorias = 0;
-    			$resultSumarDocumentosSubcategorias = 0;
     				
     		    $this->view("Bienvenida",array(
-    		        "allusers"=>$_usuario , "resultSumarDocumentosCategorias"=>$resultSumarDocumentosCategorias, "resultSumarDocumentosSubcategorias"=>$resultSumarDocumentosSubcategorias
+    		        "allusers"=>$_usuario 
 	    		));
     		}
     		else

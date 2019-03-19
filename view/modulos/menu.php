@@ -45,6 +45,7 @@ $controladores=$_SESSION['controladores'];
                     <ul class="nav child_menu">
                     <li style="<?php echo getcontrolador("Departamentos",$controladores) ?>"><a href="index.php?controller=Departamentos&action=index">Departamentos</a></li>
                       <li style="<?php echo getcontrolador("Empleados",$controladores) ?>"><a href="index.php?controller=Empleados&action=index">Empleados</a></li>
+                      <li style="<?php echo getcontrolador("Turnos",$controladores) ?>"><a href="index.php?controller=Turnos&action=index">Turnos</a></li>
                       
                       <li style="<?php echo getcontrolador("Pantalla",$controladores) ?>"><a href="index.php?controller=Pantalla&action=index">Pantalla</a></li>
                       
