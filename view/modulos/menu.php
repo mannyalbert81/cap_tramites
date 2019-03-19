@@ -43,6 +43,9 @@ $controladores=$_SESSION['controladores'];
                   </li>
                   <li style="<?php echo getcontrolador("MenuProcesos",$controladores) ?>"><a><i class="fa fa-edit"></i> Procesos <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                    <li style="<?php echo getcontrolador("Departamentos",$controladores) ?>"><a href="index.php?controller=Departamentos&action=index">Departamentos</a></li>
+                      <li style="<?php echo getcontrolador("Empleados",$controladores) ?>"><a href="index.php?controller=Empleados&action=index">Empleados</a></li>
+                      
                       <li style="<?php echo getcontrolador("Pantalla",$controladores) ?>"><a href="index.php?controller=Pantalla&action=index">Pantalla</a></li>
                       
                     </ul>
