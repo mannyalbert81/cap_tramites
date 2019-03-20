@@ -27,16 +27,30 @@
     <link href="view/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    
+    <link href="view/build/css/custom.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md" onload="tabla_turnos();" >
     <div class="container body">
       <div class="main_container">
-        
+        <div class="col-md-3 left_col  menu_fixed">
+          <div class="left_col scroll-view">
+            <?php include("view/modulos/logo.php"); ?>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+			<?php include("view/modulos/menu_profile.php"); ?>
+            <!-- /menu profile quick info -->
+
+            <br />
+			<?php include("view/modulos/menu.php"); ?>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
 
         <!-- top navigation -->
-	
+			<?php include("view/modulos/head.php"); ?>	
         <!-- /top navigation -->
 
         	<!-- page content -->
@@ -118,7 +132,7 @@
     <script src="view/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
- 
+    <script src="view/build/js/custom.min.js"></script>
 	
 	<!-- codigo de las funciones -->
 	<script src="view/js/funciones.js?1.0"></script> 

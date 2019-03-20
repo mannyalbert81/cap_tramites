@@ -454,7 +454,7 @@
         	       		
 						$( "#cedula_afiliado" ).autocomplete({
 		      				source: "<?php echo $helper->url("Turnos","AutocompleteCedula"); ?>",
-		      				minLength: 1
+		      				minLength: 5
 		    			});
 		
 						$("#cedula_afiliado").focusout(function(){
