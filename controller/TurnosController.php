@@ -80,9 +80,10 @@ class TurnosController extends ControladorBase{
 		    $_id_empleados         = $_POST["id_empleados"];
 		    $_numero_turnos_tramites   	   = $_POST["numero_turnos_tramites"];
 			
-		    
+		   
 		    if($_id_afiliado > 0){
 		    	
+		        
 		    		
 		        	$funcion = "turnos_tramites";
 		        	$parametros = "'$_numero_turnos_tramites',
@@ -96,52 +97,30 @@ class TurnosController extends ControladorBase{
 		        
 		        	if($resultado){
 		        	    
+		        	    
+		        	    
 		        	    $departamentos->UpdateBy("consecutivo_departamentos = consecutivo_departamentos+1", "departamentos", "id_departamentos = '$_id_departamentos'");
 		        	
-		        	
 		        	    
-		        	    $columnas ="";
-		        	    $tablas = "";
-		        	    $where = "";
-		        	    $id="";
+		        	    //die();
 		        	    
+		        	    //$this->redirect("Turnos", "index");
 		        	    
+		        	    print '<script type="text/javascript">';
+		        	    print 'window.open("index.php?controller=Turnos&action=lanzarPag")';
+		        	    print '</script>';
 		        	    
+		        	    print '<script type="text/javascript">';
+		        	    print 'window.open("index.php?controller=Turnos&action=index","_self")';
+		        	    print '</script>';
 		        	    
-		        	    
-		        	    $html="";
-		        	    $fechaactual = getdate();
-		        	    $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
-		        	    $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-		        	    $fechaactual=$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
-		        	    
-		        	    $directorio = $_SERVER ['DOCUMENT_ROOT'] . '/cap_tramites';
-		        	    $dom=$directorio.'/view/dompdf/dompdf_config.inc.php';
-		        	    $domLogo=$directorio.'/view/images/logo.png';
-		        	    $logo = '<img src="'.$domLogo.'" alt="Responsive image" width="80" height="45">';
-		        	    
-		        	     
-		        	        $html.='<table style="width: 100%;">';
-		        	        $html.='<tr>';
-		        	        $html.='<th colspan="12" style="text-align:center;">'.$domLogo.'</th>';
-		        	        $html.='<th colspan="12" style="text-align:center;">'.$domLogo.'</th>';
-		        	        $html.='</tr>';
-		        	        $html.='</table">';
-		        	       
-		        	        
-		        	        $this->report("Turno",array( "resultSet"=>$html));
-		        	        die();
-		        	        
-		        	    }
-		        	    
-		        	    
-		        	    $this->redirect("Turnos", "index");
-		        	
+		        	    //die('llego');
+		         }	
 		        	
 		  }
 		  
 		   
-		    $this->redirect("Turnos", "index");
+		    //$this->redirect("Turnos", "index");
 		}
 		
 	   }else{
@@ -159,7 +138,39 @@ class TurnosController extends ControladorBase{
 	   }
 	}
 	
-	
+	public function  lanzarPag(){
+	    
+	    $columnas ="";
+	    $tablas = "";
+	    $where = "";
+	    $id="";
+	    
+	    
+	    $html="";
+	    $fechaactual = getdate();
+	    $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+	    $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	    $fechaactual=$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
+	    
+	    $directorio = $_SERVER ['DOCUMENT_ROOT'] . '/cap_tramites';
+	    $dom=$directorio.'/view/dompdf/dompdf_config.inc.php';
+	    $domLogo=$directorio.'/view/images/logo.png';
+	    $logo = '<img src="'.$domLogo.'" alt="Responsive image" width="80" height="45">';
+	    
+	    
+	    $html.='<table style="width: 100%;">';
+	    $html.='<tr>';
+	    $html.='<th colspan="12" style="text-align:center;">'.$logo.'</th>';
+	    $html.='<th colspan="12" style="text-align:center;">'.$logo.'</th>';
+	    $html.='</tr>';
+	    $html.='</table>';
+	    
+	    
+	    
+	    
+	    $this->report("Turno",array( "resultSet"=>$html));
+	   
+	}
 	
 
 
