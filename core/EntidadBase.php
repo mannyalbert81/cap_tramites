@@ -116,7 +116,7 @@ class EntidadBase{
 
     public function getCondiciones($columnas ,$tablas , $where, $id){
     	
-    	$query=pg_query($this->con, "SELECT $columnas FROM $tablas WHERE $where ORDER BY $id  ASC");
+    	$query=pg_query($this->con, "SELECT $columnas FROM $tablas WHERE $where ORDER BY $id  ASC ");
     	$resultSet = array();
     	while ($row = pg_fetch_object($query)) {
     		$resultSet[]=$row;
@@ -125,6 +125,18 @@ class EntidadBase{
     	return $resultSet;
     }
   
+    
+    public function getCondicionesDesc($columnas ,$tablas , $where, $id, $limit){
+        
+        $query=pg_query($this->con, "SELECT $columnas FROM $tablas WHERE $where ORDER BY $id  DESC $limit");
+        $resultSet = array();
+        while ($row = pg_fetch_object($query)) {
+            $resultSet[]=$row;
+        }
+        
+        return $resultSet;
+    }
+    
     public function getCondiciones2($columnas ,$tablas , $where){
     	 
     	$query=pg_query($this->con, "SELECT $columnas FROM $tablas WHERE $where ");

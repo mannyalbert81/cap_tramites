@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Turnos Capremci | </title>
+    <title>Turnos Capremci</title>
 
     <!-- Bootstrap -->
     <link href="view/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
     <link href="view/build/css/custom.min.css" rel="stylesheet">
   </head>
 
-  <body class="nav-md" onload="contar_user(); contar_documentos(); sumar_paginas(); contar_cartones(); sumar_sesiones(); " >
+  <body class="nav-md" onload="tabla_turnos();" >
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col  menu_fixed">
@@ -75,6 +75,10 @@
 						  <div class="panel panel-primary ">
 						      <div class="panel-heading " style="text-align: center;"> <h1><b>TURNOS EN ESPERA</b></h1></div>
 						      <div class="panel-body" id="tabla_turnos">
+									
+									 <div id="tabla_turnos">
+									 </div>
+									
 									
 						      </div>
 						    </div>

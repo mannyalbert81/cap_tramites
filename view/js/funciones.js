@@ -1,11 +1,11 @@
-
+$(document).ready( function (){
 function tabla_turnos(){
-	 $(document).ready( function (){
+	 
 	     $.ajax({
 	               beforeSend: function(){
 	                 $("#tabla_turnos").html("")
 	               },
-	               url: 'index.php?controller=pantalla&action=tabla_turnos',
+	               url: 'index.php?controller=Pantalla&action=tabla_turnos',
 	               type: 'POST',
 	               data: null,
 	               success: function(x){
@@ -15,6 +15,8 @@ function tabla_turnos(){
 	                $("#tabla_turnos").html("Ocurrio un error al cargar la informacion de Turnos..."+estado+"    "+error);
 	              }
 	            });
-	   })
+	  
 	}
+setInterval(tabla_turnos, 10000);
+});
 

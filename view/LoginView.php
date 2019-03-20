@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>IndexDocument | </title>
+    <title>Capremci </title>
 
     <!-- Bootstrap -->
     <link href="view/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,14 +24,12 @@
 
   <body class="login">
     <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
+     
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
             <form id="form-login" action="<?php echo $helper->url("usuarios","Loguear"); ?>" method="post" ">
-              <img src="view/images/logo_sonda.png" class="img-rounded" alt="Sonda Logo">
+              <img src="view/images/logo.png" class="img-rounded" alt="Sonda Logo">
               
               <div>
                 <input id="usuario" name="usuario" type="text" class="form-control" placeholder="usuario" required="" />
@@ -40,7 +38,7 @@
                 <input id="clave" name="clave"   type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-              -	<button type="submit"  class="btn btn-primary submit" >Iniciar Sesión</button>
+              	<button type="submit"  class="btn btn-primary submit" >Iniciar Sesión</button>
                 
                 
               </div>
@@ -52,8 +50,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-archive"></i> IndexDocument!</h1>
-                  <p>©2017 All Rights Reserved</p>
+                  <h1><i class="fa fa-archive"></i> Capremci</h1>
+                  <p>©2019 All Rights Reserved</p>
                 </div>
               </div>
             </form>

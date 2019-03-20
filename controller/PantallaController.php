@@ -32,7 +32,7 @@ public function index(){
 	}
 	
 	
-	public function tabla_turnos (){
+	public function tabla_turnos(){
 		session_start();
 		$html = '';
 		$i=0;
@@ -42,9 +42,10 @@ public function index(){
 		$tablas   = "public.empleados, public.turnos_tramites, public.departamentos";
 		$where    = "turnos_tramites.id_departamentos = departamentos.id_departamentos AND   turnos_tramites.id_empleados = empleados.id_empleados";
 		$id       = "turnos_tramites.numero_turnos_tramites";
+		$limit ="LIMIT 8";
 			
 	
-		$resultSet = $turnos_tramites->getCondiciones($columnas ,$tablas ,$where, $id);
+		$resultSet = $turnos_tramites->getCondicionesDesc($columnas ,$tablas ,$where, $id, $limit);
 	
 		$i=count($resultSet);
 	
@@ -62,15 +63,11 @@ public function index(){
 			
 			
 			$html .= '<div class="col-xs-8 col-sm-8 col-lg-8" style="text-align: left;">';
-			$html .= '<h1><b> '. $res->numero_turnos_tramites .'</b></h1>';
+			$html .= '<h3><b>'. $res->numero_turnos_tramites .'</b></h3>';
 			$html .= '</div>';
-			$html .= '<div class="col-xs-4 col-sm-4 col-lg-4" style="text-align: left;">';
-			$html .= '<h1><b>'. $res->modulo_empleados .'</b></h1>';
+			$html .= '<div class="col-xs-4 col-sm-4 col-lg-4" style="text-align: center;">';
+			$html .= '<h3><b>'. $res->modulo_empleados .'</b></h3>';
 			$html .= '</div>';
-			$html .= '</div>';
-			$html .= '<tr>';
-			
-				
 				
 				
 		}
