@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>IndexDocument! | </title>
+    <title>Turnos Capremci | </title>
 
     <!-- Bootstrap -->
     <link href="view/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -59,13 +59,14 @@
           		<div class="row">
 			  		<div class="col-xs-8 col-sm-8 col-lg-8">
 			  		
-			  		<div align="center" class="embed-responsive embed-responsive-16by9">
-					    <video autoplay loop class="embed-responsive-item">
-					        <source src="view/videos/bienvenido_capremci.mp4" type="video/mp4">
-					    </video>
-					</div>
-							
-							 
+							 <div align="center" class="embed-responsive embed-responsive-16by9">
+							    <video autoplay loop class="embed-responsive-item">
+							        <source src="view/videos/bienvenido_capremci.mp4" type="video/mp4">
+							    </video>
+							</div>
+			  		
+			  		
+			  		
 			  		</div>
 			  		<div class="col-xs-4 col-sm-4 col-lg-4">
 						
@@ -73,23 +74,7 @@
 						<div class="panel-group">
 						  <div class="panel panel-primary ">
 						      <div class="panel-heading " style="text-align: center;"> <h1><b>TURNOS EN ESPERA</b></h1></div>
-						      <div class="panel-body">
-									<div class="col-xs-8 col-sm-8 col-lg-8 " style="text-align: left;">
-										<div class="col-xs-8 col-sm-8 col-lg-8">
-											<h3>TURNO</h3>			
-										</div>
-										<div class="col-xs-4 col-sm-4 col-lg-4" style="text-align: left;">
-											<h3>MODULO</h3>			
-										</div>
-										
-										<div class="col-xs-8 col-sm-8 col-lg-8" style="text-align: left;">
-											<h1><b>C001</b></h1>			
-										</div>
-										<div class="col-xs-4 col-sm-4 col-lg-4" style="text-align: left;">
-											<h1><b>01</b></h1>			
-										</div>
-										
-									</div>
+						      <div class="panel-body" id="tabla_turnos">
 									
 						      </div>
 						    </div>
