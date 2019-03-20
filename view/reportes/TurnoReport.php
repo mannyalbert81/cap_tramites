@@ -13,12 +13,12 @@ $html =$resultSet;
 $dompdf = new DOMPDF();
 $dompdf->load_html(utf8_decode($html));
 $dompdf->set_base_path("/");
-$dompdf->set_paper(array(0,0,100,150));
+$dompdf->set_paper(array(0,0,150,180));
 $pdf = $dompdf->render();
 $canvas = $dompdf->get_canvas();
 $font = Font_Metrics::get_font("helvetica", "bold");
 
-$canvas->page_text(260, 812, "Copyright © 2019", $font, 6, array(0,0,0)); //footer
+//$canvas->page_text(260, 812, "Copyright © 2019", $font, 6, array(0,0,0)); //footer
 header("Content-type: application/pdf");
 echo $dompdf->output();
 

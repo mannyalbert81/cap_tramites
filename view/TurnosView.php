@@ -33,7 +33,6 @@
 		    <link href="view/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
 		    <link href="view/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 					
-          <script src="view/css/bootstrapValidator.min.js"></script>
 	
         	        
     </head>
@@ -519,15 +518,15 @@
 		    	if (id_afiliado == 0 )
 		    	{
 			    	
-		    		$("#mensaje_id_afiliado").text("Ingrese Cedula");
-		    		$("#mensaje_id_afiliado").fadeIn("slow"); //Muestra mensaje de error
-		    		$("html, body").animate({ scrollTop: $(mensaje_id_afiliado).offset().top-120 }, tiempo);
+		    		$("#mensaje_cedula_afiliado").text("Ingrese Cedula");
+		    		$("#mensaje_cedula_afiliado").fadeIn("slow"); //Muestra mensaje de error
+		    		$("html, body").animate({ scrollTop: $(mensaje_cedula_afiliado).offset().top-120 }, tiempo);
 					
 		            return false;
 			    }
 		    	else 
 		    	{
-		    		$("#mensaje_id_afiliado").fadeOut("slow"); //Muestra mensaje de error
+		    		$("#mensaje_cedula_afiliado").fadeOut("slow"); //Muestra mensaje de error
 		            
 				}
 
@@ -605,8 +604,8 @@
 
 		    
 
-		        $( "#id_afiliado" ).focus(function() {
-				  $("#mensaje_id_afiliado").fadeOut("slow");
+		        $( "#cedula_afiliado" ).focus(function() {
+				  $("#mensaje_cedula_afiliado").fadeOut("slow");
 			    });
 		        $( "#id_empleados" ).focus(function() {
 					  $("#mensaje_id_empleados").fadeOut("slow");

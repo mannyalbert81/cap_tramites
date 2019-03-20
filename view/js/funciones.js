@@ -1,4 +1,7 @@
 $(document).ready( function (){
+	
+
+	
 function tabla_turnos(){
 	 
 	     $.ajax({
@@ -18,5 +21,12 @@ function tabla_turnos(){
 	  
 	}
 setInterval(tabla_turnos, 10000);
+
+
+
+
+
+
+
 });
 

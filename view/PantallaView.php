@@ -59,15 +59,11 @@
           		<div class="row">
 			  		<div class="col-xs-8 col-sm-8 col-lg-8">
 			  		
-							 <div align="center" class="embed-responsive embed-responsive-16by9">
-							    <video autoplay loop class="embed-responsive-item">
-							        <source src="view/videos/bienvenido_capremci.mp4" type="video/mp4">
-							    </video>
-							</div>
-			  		
-			  		
-			  		
+			  			<iframe id="reproducir_video" width="100%" height="500px"></iframe>
+			  			
 			  		</div>
+			  		
+			  		
 			  		<div class="col-xs-4 col-sm-4 col-lg-4">
 						
 	
@@ -139,7 +135,25 @@
     <script src="view/build/js/custom.min.js"></script>
 	
 	<!-- codigo de las funciones -->
-	<script src="view/js/funciones.js"></script> 
+	<script src="view/js/funciones.js?1.0"></script> 
 	
+	<script type="text/javascript">
+	
+	  $(document).ready( function (){
+		  video();
+		  
+			});
+	
+	function video(){
+		 
+		imgficha = 'view/videos/bienvenido_capremci.mp4';
+
+		$("#reproducir_video").attr({'src':imgficha});
+	 
+	}
+	
+	setInterval(video, 40000);
+	
+	</script>
   </body>
 </html>

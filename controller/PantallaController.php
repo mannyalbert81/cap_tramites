@@ -8,8 +8,7 @@ class PantallaController extends ControladorBase{
 public function index(){
 	
 		session_start();
-		if (isset(  $_SESSION['usuario_usuario']) )
-		{
+		
 			
 					
 					$this->view("Pantalla",array(
@@ -17,17 +16,7 @@ public function index(){
 				
 					));
 
-		}
-		else 
-		{
-			$this->view("ErrorSesion",array(
-					"resultSet"=>""
 		
-			));
-			
-			
-			
-		}
 		
 	}
 	

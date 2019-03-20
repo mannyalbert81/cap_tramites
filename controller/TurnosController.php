@@ -101,26 +101,20 @@ class TurnosController extends ControladorBase{
 		        	    
 		        	    $departamentos->UpdateBy("consecutivo_departamentos = consecutivo_departamentos+1", "departamentos", "id_departamentos = '$_id_departamentos'");
 		        	
-		        	    
-		        	    //die();
-		        	    
-		        	    //$this->redirect("Turnos", "index");
-		        	    
 		        	    print '<script type="text/javascript">';
-		        	    print 'window.open("index.php?controller=Turnos&action=lanzarPag")';
+		        	    print 'window.open("index.php?controller=Turnos&action=lanzarPag&id_empleados='.$_id_empleados.'&id_afiliado='.$_id_afiliado.'&id_tramites_departamentos='.$_id_tramites_departamentos.'&numero_turnos_tramites='.$_numero_turnos_tramites.' ")';
 		        	    print '</script>';
 		        	    
 		        	    print '<script type="text/javascript">';
 		        	    print 'window.open("index.php?controller=Turnos&action=index","_self")';
 		        	    print '</script>';
 		        	    
-		        	    //die('llego');
+		        	  
 		         }	
 		        	
 		  }
 		  
-		   
-		    //$this->redirect("Turnos", "index");
+		  
 		}
 		
 	   }else{
@@ -140,35 +134,101 @@ class TurnosController extends ControladorBase{
 	
 	public function  lanzarPag(){
 	    
-	    $columnas ="";
-	    $tablas = "";
-	    $where = "";
-	    $id="";
 	    
+	    $empleados = new EmpleadosModel();
+	    $tramites_departamentos = new TramitesDepartamentosModel();
 	    
-	    $html="";
-	    $fechaactual = getdate();
-	    $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
-	    $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-	    $fechaactual=$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
+	    $_modulo_empleados="";
+	    $_nombre_tramites_departamentos="";
 	    
-	    $directorio = $_SERVER ['DOCUMENT_ROOT'] . '/cap_tramites';
-	    $dom=$directorio.'/view/dompdf/dompdf_config.inc.php';
-	    $domLogo=$directorio.'/view/images/logo.png';
-	    $logo = '<img src="'.$domLogo.'" alt="Responsive image" width="80" height="45">';
+	    if(isset($_GET["id_empleados"]) && isset($_GET["id_afiliado"]) && isset($_GET["numero_turnos_tramites"])){
+	        
+	        $_id_afiliado    = $_GET["id_afiliado"];
+	        $_id_tramites_departamentos       = $_GET["id_tramites_departamentos"];
+	        $_id_empleados         = $_GET["id_empleados"];
+	        $_numero_turnos_tramites   	   = $_GET["numero_turnos_tramites"];
+	        
+	        
+	        $resultEmp=$empleados->getBy("id_empleados='$_id_empleados'");
+	        
+	        $resultTram=$tramites_departamentos->getBy("id_tramites_departamentos='$_id_tramites_departamentos'");
+	        
+	        if(!empty($resultEmp)){
+	            
+	            $_modulo_empleados = $resultEmp[0]->modulo_empleados;
+	            
+	        }else{
+	            
+	            $_modulo_empleados="";
+	        }
+	        
+	        if(!empty($resultTram)){
+	            
+	            $_nombre_tramites_departamentos = $resultTram[0]->nombre_tramites_departamentos;
+	            
+	        }else{
+	            
+	            $_nombre_tramites_departamentos="";
+	        }
+	        
+	        
+	        $html="";
+	        $fechaactual = getdate();
+	        $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+	        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	        $fechaactual=$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
+	        
+	        
+	        
+	        date_default_timezone_set('America/Guayaquil');
+	        $fechaActual = date('d-m-Y H:i:s');
+	     
+	        
+	        
+	        $directorio = $_SERVER ['DOCUMENT_ROOT'] . '/cap_tramites';
+	        $dom=$directorio.'/view/dompdf/dompdf_config.inc.php';
+	        $domLogo=$directorio.'/view/images/logo.png';
+	        $logo = '<img src="'.$domLogo.'" alt="Responsive image" width="100" height="55">';
+	        
+	        
+	        $html.='<html lang="es">';
+	        $html.='<head>';
+	        $html.='</head>';
+	        $html.='<body style="margin: 0px;">';
+	        
+	        $html.='<table style="width: 100%;">';
+	        $html.='<tr>';
+	        $html.='<th  style="text-align:center;">'.$logo.'</th>';
+	        $html.='</tr>';
+	        $html.='<tr>';
+	        $html.='<th  style="font-size:12px; text-align:center;">'.$_numero_turnos_tramites.'</th>';
+	        $html.='</tr>';
+	        $html.='<tr>';
+	        $html.='<th  style="font-size:12px; text-align:center;">'.$_nombre_tramites_departamentos.'</th>';
+	        $html.='</tr>';
+	        $html.='<tr>';
+	        $html.='<th style="font-size:12px; text-align:center;">Módulo '.$_modulo_empleados.'</th>';
+	        $html.='</tr>';
+	        $html.='<tr>';
+	        $html.='<th style="font-size:10px; text-align:center;">'.$fechaActual.'</th>';
+	        $html.='</tr>';
+	        
+	        $html.='<br>';
+	      
+	        
+	        $html.='</table>';
+	        
+	        
+	        $html.='</body>';
+	        
+	        $html.='</html>';
+	        
+	        
+	        
+	        
+	        $this->report("Turno",array( "resultSet"=>$html));
+	    }
 	    
-	    
-	    $html.='<table style="width: 100%;">';
-	    $html.='<tr>';
-	    $html.='<th colspan="12" style="text-align:center;">'.$logo.'</th>';
-	    $html.='<th colspan="12" style="text-align:center;">'.$logo.'</th>';
-	    $html.='</tr>';
-	    $html.='</table>';
-	    
-	    
-	    
-	    
-	    $this->report("Turno",array( "resultSet"=>$html));
 	   
 	}
 	
