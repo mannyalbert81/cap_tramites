@@ -50,7 +50,7 @@
         </div>
 
         <!-- top navigation -->
-			<?php include("view/modulos/head.php"); ?>	
+	
         <!-- /top navigation -->
 
         	<!-- page content -->
@@ -59,7 +59,7 @@
           		<div class="row">
 			  		<div class="col-xs-8 col-sm-8 col-lg-8">
 			  		
-			  			<iframe id="reproducir_video" width="100%" height="500px"></iframe>
+			  			<iframe id="reproducir_video" width="100%" height="400px"></iframe>
 			  			
 			  		</div>
 			  		
