@@ -5,19 +5,14 @@ class PantallaController extends ControladorBase{
         parent::__construct();
     }
     
-public function index(){
+    
+    public function index(){
 	
 		session_start();
-		
-			
-					
-					$this->view("Pantalla",array(
+				$this->view("Pantalla",array(
 							"resultSet"=>""
 				
 					));
-
-		
-		
 	}
 	
 	
@@ -29,7 +24,7 @@ public function index(){
 	
 		$columnas = " empleados.modulo_empleados, turnos_tramites.numero_turnos_tramites ";
 		$tablas   = "public.empleados, public.turnos_tramites, public.departamentos";
-		$where    = "turnos_tramites.id_departamentos = departamentos.id_departamentos AND   turnos_tramites.id_empleados = empleados.id_empleados";
+		$where    = "turnos_tramites.id_departamentos = departamentos.id_departamentos AND turnos_tramites.id_empleados = empleados.id_empleados AND turnos_tramites.id_estado=2";
 		$id       = "turnos_tramites.numero_turnos_tramites";
 		$limit ="LIMIT 8";
 			
