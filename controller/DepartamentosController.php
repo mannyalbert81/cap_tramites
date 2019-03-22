@@ -1,6 +1,6 @@
 <?php
 
-class DepartamentosController extends ControladorBase{
+class EstadoTramitesController extends ControladorBase{
     
     public function __construct() {
         parent::__construct();
