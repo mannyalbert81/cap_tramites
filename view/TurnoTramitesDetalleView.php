@@ -2,7 +2,7 @@
 <html lang="es">
       <head>
         <meta charset="utf-8"/>
-        <title>Turnos - Capremci</title>
+        <title>Actualización de Trámites - Capremci</title>
 
            <link rel="stylesheet" href="view/css/estilos.css">
 
@@ -69,7 +69,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Generación de Turnos</h2>
+                    <h2>Mantenimiento de Trámites</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -81,13 +81,62 @@
                   </div>
                   <div class="x_content">
 
-            <form  action="<?php echo $helper->url("Turnos","InsertaTurnos"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-12 col-md-12 col-xs-12">
+            <form  action="<?php echo $helper->url("TurnoTramitesDetalle","InsertaTurnoTramitesDetalle"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-12 col-md-12 col-xs-12">
+             
+             <?php if (!empty($resultEdit) ){?>
+            		<div class="panel panel-info">
+	         			<div class="panel-heading">
+	         				<h4><i class='glyphicon glyphicon-edit'></i>Actualizar Trámite</h4>
+	         			</div>
+	        			 <div class="panel-body">
                                
-             <div class="panel panel-info">
-	         <div class="panel-heading">
-	         <h4><i class='glyphicon glyphicon-edit'></i> Datos Participe</h4>
-	         </div>
-	         <div class="panel-body">
+                              <div class="col-lg-4 col-xs-6 col-md-4">
+                    		  <div class="form-group">
+                                                  <label for="estado_tramites" class="control-label">Estado Trámites:</label>
+                                                  	<select name="id_estado_tramites" id="id_estado_tramites"  class="form-control" >
+				                                            <option value="" selected="selected">--Seleccione--</option>
+				                        						<?php foreach($resultEst as $res) {?>
+				                        					<option value="<?php echo $res->id_estado_tramites; ?>"><?php echo $res->nombre_estado_tramites; ?> </option>
+				                        					     <?php } ?>
+				                        			</select>
+                                                  <div id="mensaje_estado_tramites" class="errores"></div>
+                              </div>
+                              </div>
+                                 
+                                    
+                               <div class="col-lg-8 col-xs-6 col-md-8">
+                    		   <div class="form-group">
+                                                  <label for="descripcion_turno_tramites_detalle" class="control-label">Descripción Trámite:</label>
+                                                  <input type="text" class="form-control" id="descripcion_turno_tramites_detalle" name="descripcion_turno_tramites_detalle" value=""  placeholder="" >
+                                                  <div id="mensaje_descripcion_turno_tramites_detalle" class="errores"></div>
+                                </div>
+                                </div>
+                                
+                                
+                                 <div class="row">
+				               	    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px">
+				                   		    <div class="form-group">
+				                                 <button type="submit" id="btnGuardar" name="btnGuardar" class="btn btn-info"><i class="glyphicon glyphicon-save"> Guardar</i></button>
+				                   	            
+				                             </div>
+				                    </div>
+				                </div>    
+                                
+                 </div>
+                 </div>    
+            
+            
+            
+            
+            
+            
+             <?php } else {?>
+             
+             		<div class="panel panel-info">
+	        		 <div class="panel-heading">
+	         		<h4><i class='glyphicon glyphicon-edit'></i>Datos Participe</h4>
+	         		</div>
+	         		<div class="panel-body">
                                
                               <div class="col-lg-2 col-xs-12 col-md-2">
                     		  <div class="form-group">
@@ -131,80 +180,120 @@
                                 </div>
                                 </div>
                                 
-                 </div>
-                 </div>               
+                                 <div class="row">
+				               	    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px">
+				                   		    <div class="form-group">
+				                                 <button type="submit" id="btnBuscar" name="btnBuscar" class="btn btn-info"><i class="glyphicon glyphicon-search"> Buscar</i></button>
+				                   	            
+				                             </div>
+				                    </div>
+				                </div>    
                                 
+                 		</div>
+                 	</div>    
+            
+             
+             
+             <?php }?>                  
+                  
                  
-             <div class="panel panel-info">
-	         <div class="panel-heading">
-	         <h4><i class='glyphicon glyphicon-edit'></i> Asignación Departamento</h4>
-	         </div>
-	         <div class="panel-body">
-                               
-                                <div class="col-lg-2 col-xs-12 col-md-2">
-                    		    <div class="form-group">
-                                                          <label for="id_departamentos" class="control-label">Departamentos:</label>
-                                                          <select name="id_departamentos" id="id_departamentos"  class="form-control" >
-                                                          <option value="0" selected="selected">--Seleccione--</option>
-                        									<?php foreach($resultDepa as $res) {?>
-                        										<option value="<?php echo $res->id_departamentos; ?>"><?php echo $res->nombre_departamentos; ?> </option>
-                        							        <?php } ?>
-                        								   </select> 
-                                                          <div id="mensaje_id_departamentos" class="errores"></div>
-                                </div>
-                    		    </div>
+                            
+              
+             <?php if (!empty($resultSet) ){?>
                                 
-                                
-                                <div class="col-lg-2 col-xs-12 col-md-2">
-                    		    <div class="form-group">
-                                                          <label for="id_tramites_departamentos" class="control-label">Trámite a Realizar:</label>
-                                                          <select name="id_tramites_departamentos" id="id_tramites_departamentos"  class="form-control" >
-                                                          <option value="0" selected="selected">--Seleccione--</option>
-                        								  </select> 
-                                                          <div id="mensaje_id_tramites_departamentos" class="errores"></div>
-                                </div>
-                    		    </div>
-                    		    
-                    		    <div class="col-lg-2 col-xs-12 col-md-2">
-                    		    <div class="form-group">
-                                                          <label for="id_empleados" class="control-label">Funcionario:</label>
-                                                          <select name="id_empleados" id="id_empleados"  class="form-control" >
-                                                          <option value="0" selected="selected">--Seleccione--</option>
-                        								  </select> 
-                                                          <div id="mensaje_id_empleados" class="errores"></div>
-                                </div>
-                    		    </div>
-                    		    
-                    		    <div class="col-lg-2 col-xs-12 col-md-2">
-                    		    <div class="form-group">
-                                                  <label for="numero_turnos_tramites" class="control-label">Número Turno:</label>
-                                                  <input type="text" class="form-control" id="numero_turnos_tramites" name="numero_turnos_tramites" value=""  placeholder="número turno.." >
-                                                  <div id="mensaje_numero_turnos_tramites" class="errores"></div>
-                                </div>
-                                </div>
-                    		    
-                                
+             <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>LISTADO<small>Trámites</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    
+					
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>Trámite</th>
+                          <th>Fecha</th>
+                          <th>Departamento</th>
+                          <th>Tipo Trámite</th>
+                          <th>Partícipe</th>
+                          <th>Atendió</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+    					
+    						<?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
+            	        		<tr>
+            	                   <td > <?php echo $res->numero_turnos_tramites; ?>  </td>
+            		               <td > <?php echo $res->creado; ?>     </td> 
+            		               <td > <?php echo $res->nombre_departamentos; ?>  </td>
+            		               <td > <?php echo $res->nombre_tramites_departamentos; ?>  </td>
+            		               <td > <?php echo $res->apellidos_afiliado ." " .$res->nombres_afiliado ; ?>  </td>
+            		               <td > <?php echo $res->nombres_empleados; ?>  </td>
+            		               
+            		               
+            		               
+            		               
+            		           	     <td>   
+            			                	<div class="right">
+            			                    <a href="<?php echo $helper->url("TurnoTramitesDetalle","InsertaTurnoTramitesDetalle"); ?>&id_turnos_tramites=<?php echo $res->id_turnos_tramites; ?>" class="btn btn-info" style="font-size:65%;"><i class="glyphicon glyphicon-tags"></i></a>
+            			                </div>
+            			                <hr/>
+            		               </td>
+            		    		</tr>
+            		        <?php } } ?>
+                    
+    					
+    					
+    					
+    					                    				  	
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
+             
+             <?php } else {?>
+             
+             	<div class="panel panel-info">
+		         <div class="panel-heading">
+		         	<h4><i class='glyphicon glyphicon-edit'></i> Trámites En Proceso</h4>
+		         </div>
+	         
               </div>                       
-                   	 
-                   	 
-                   	 
-                   	            <div class="row">
-                    		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px">
-                    		    <div class="form-group">
-                                                      <button type="submit" id="Guardar" name="Guardar" class="btn btn-success"><i class="glyphicon glyphicon-floppy-saved"> Generar</i></button>
-                                					  <button type="button" id="Cancelar" name="Cancelar" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-remove"> Cancelar</i></button>
+               <div class="row">
+               	    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px">
+                   		    <div class="form-group">
+                                 <button type="submit" id="Guardar" name="Guardar" class="btn btn-success"><i class="glyphicon glyphicon-floppy-saved"> Generar</i></button>
+                   			     <button type="button" id="Cancelar" name="Cancelar" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-remove"> Cancelar</i></button>
                                 
-                                </div>
-                    		    </div>
-                    		    </div>     
+                             </div>
+                    </div>
+                </div>     
                   
               </form>
   			
                   </div>
                 </div>
               </div>
-		
+	
+             
+             <?php }?>
+             
+                 
+             	
     		
     		
      

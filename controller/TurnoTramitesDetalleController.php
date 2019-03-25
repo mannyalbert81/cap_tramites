@@ -1,5 +1,5 @@
 <?php
-class TurnosTramiteDetalleController extends ControladorBase{
+class TurnoTramitesDetalleController extends ControladorBase{
     
     public function __construct() {
         parent::__construct();
@@ -17,21 +17,22 @@ class TurnosTramiteDetalleController extends ControladorBase{
 			
 			$_id_estado_atendido = 1;
 			
-			$turno_tramites_detalle = new TurnosTramitesDetalleModel();
+			$turno_tramites_detalle = new TurnoTramitesDetalleModel();
 			
 			
-			$resultTram=$turno_tramites_detalle->getBy("id_estado='$_id_estado_atendido'");
+			$resultTram= ""; //$turno_tramites_detalle->getBy("id_estado='$_id_estado_atendido'");
+			$controladores = new ControladoresModel();
 			
-			$nombre_controladores = "TurnosTramitesDetalle";
+			$nombre_controladores = "TurnoTramitesDetalle";
 			$id_rol= $_SESSION['id_rol'];
-			$resultPer = $turnos->getPermisosVer("controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+			$resultPer = $controladores->getPermisosVer("controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 				
 			if (!empty($resultPer))
 			{
 			
 					
 					
-					$this->view("TurnosTramitesDetalle",array(
+					$this->view("TurnoTramitesDetalle",array(
 							 "resultTram"=>$resultTram
 					
 					));
@@ -63,62 +64,116 @@ class TurnosTramiteDetalleController extends ControladorBase{
 	
 	
 	
-	public function InsertaTurnos(){
+	public function InsertaTurnoTramitesDetalle(){
 			
 		session_start();
 		
 		if (isset(  $_SESSION['usuario_usuario']) )
 		{
-			$turnos=new TurnosTramitesModel();
-			$departamentos = new DepartamentosModel();
+			$turnos_tramites_detalle=new TurnoTramitesDetalleModel();
+			$turnos = new TurnosTramitesModel();
+		    $estado_tramites = new EstadoTramitesModel();
+		    
+		    
+		    $resultEst=$estado_tramites->getAll("nombre_estado_tramites");
+		    $resultEdit = "";
+		    $resultSet = "";
+		    $resultEst = "";
+		    
+		    
+		    
+		    $columnas  = "turnos_tramites.numero_turnos_tramites,
+  							  afiliado.cedula_afiliado,
+  								afiliado.apellidos_afiliado,
+  								afiliado.nombres_afiliado,
+  								turnos_tramites.id_turnos_tramites,
+								turnos_tramites.creado,
+  								turnos_tramites.modificado,
+  								estado.nombre_estado,
+  								departamentos.nombre_departamentos,
+  								empleados.nombres_empleados,
+  								empleados.apellidos_empleados,
+  								tramites_departamentos.nombre_tramites_departamentos";
+		    $tablas = "		public.turnos_tramites,
+  								public.estado,
+  								public.afiliado,
+  								public.empleados,
+  								public.departamentos,
+  								public.tramites_departamentos";
+		    
 			
-		if (isset ($_POST["id_afiliado"]))
-		{
-		
-		    $_id_afiliado    = $_POST["id_afiliado"];
-		    $_id_departamentos  = $_POST["id_departamentos"];
-		    $_id_tramites_departamentos       = $_POST["id_tramites_departamentos"];
-		    $_id_empleados         = $_POST["id_empleados"];
-		    $_numero_turnos_tramites   	   = $_POST["numero_turnos_tramites"];
-			
-		   
-		    if($_id_afiliado > 0){
+		    if (isset ($_GET["id_turnos_tramites"]))
+		    {
+		    	$_id_turnos_tramites =  $_GET["id_turnos_tramites"];
 		    	
-		        
+		    	$where = "		estado.id_estado = turnos_tramites.id_estado AND
+		    	afiliado.id_afiliado = turnos_tramites.id_afiliado AND
+		    	empleados.id_empleados = turnos_tramites.id_empleados AND
+		    	departamentos.id_departamentos = turnos_tramites.id_departamentos AND
+		    	tramites_departamentos.id_tramites_departamentos = turnos_tramites.id_tramites_departamentos
+		    	AND turnos_tramites.id_turnos_tramites = '$_id_turnos_tramites' ";
+		    	$id   = " turnos_tramites.creado ";
+		    	
+		    	$resultEdit = $turnos->getCondiciones($columnas ,$tablas , $where, $id);
+		    	$resultEst=$estado_tramites->getAll("nombre_estado_tramites");
+		    	
+		    	
+		    
+		    }
+		    	
+		    			
+		    
 		    		
-		        	$funcion = "turnos_tramites";
-		        	$parametros = "'$_numero_turnos_tramites',
-		        	'$_id_departamentos',
-		        	'$_id_tramites_departamentos',
-		        	'$_id_empleados',
-		        	'$_id_afiliado'";
-		        	$turnos->setFuncion($funcion);
-		        	$turnos->setParametros($parametros);
-		        	$resultado=$turnos->Insert();
-		        
-		        	if($resultado){
-		        	    
-		        	    
-		        	    
-		        	    $departamentos->UpdateBy("consecutivo_departamentos = consecutivo_departamentos+1", "departamentos", "id_departamentos = '$_id_departamentos'");
-		        	
-		        	    print '<script type="text/javascript">';
-		        	    print 'window.open("index.php?controller=Turnos&action=lanzarPag&id_empleados='.$_id_empleados.'&id_afiliado='.$_id_afiliado.'&id_tramites_departamentos='.$_id_tramites_departamentos.'&numero_turnos_tramites='.$_numero_turnos_tramites.' ")';
-		        	    print '</script>';
-		        	    
-		        	    print '<script type="text/javascript">';
-		        	    print 'window.open("index.php?controller=Turnos&action=index","_self")';
-		        	    print '</script>';
-		        	    
-		        	  
-		         }	
-		        	
-		  }
-		  
-		  
-		}
-		
-	   }else{
+			
+			if (isset ($_POST["id_afiliado"]) && isset($_POST["btnBuscar"]) )
+			{
+			
+				$_id_afiliado = $_POST["id_afiliado"];
+				
+				$where = "		estado.id_estado = turnos_tramites.id_estado AND
+  								afiliado.id_afiliado = turnos_tramites.id_afiliado AND
+  								empleados.id_empleados = turnos_tramites.id_empleados AND
+  								departamentos.id_departamentos = turnos_tramites.id_departamentos AND
+  								tramites_departamentos.id_tramites_departamentos = turnos_tramites.id_tramites_departamentos
+								AND afiliado.id_afiliado = '$_id_afiliado' ";
+				$id   = " turnos_tramites.creado ";
+				
+				$resultSet = $turnos->getCondiciones($columnas ,$tablas , $where, $id);
+				
+			
+				
+			}
+			
+			if (isset ($_POST["id_turno_tramites"]) && isset($_POST["btnGuardar"]) )
+			{
+				$_id_usuario = $_SESSION['id_usuario'];
+				$_id_turnos_tramites = $_POST["id_turno_tramites"];
+				$_id_estado_tramites = $_POST["id_estado_tramites"];
+				
+				$_descripcion_turno_tramites_detalle =  $_POST["descripcion_turno_tramites_detalle"];
+				
+				$funcion = "ins_turno_tramites_detalle";
+				$parametros = " '$_id_turno_tramites' ,'$_id_estado_tramites' , '$_descripcion_turno_tramites_detalle', '$_id_usuario'";
+				$usuarios->setFuncion($funcion);
+				$usuarios->setParametros($parametros);
+				$resultado=$usuarios->Insert();
+					
+				
+			
+			}
+			
+			
+			
+			$this->view("TurnoTramitesDetalle",array(
+					"resultSet"=>$resultSet , "resultEst"=>$resultEst, "resultEdit"=>$resultEdit
+			
+			));
+			
+			
+			
+	   }
+	   else
+	   {
 	   	
 	   	$error = TRUE;
 	   	$mensaje = "Te sesión a caducado, vuelve a iniciar sesión.";

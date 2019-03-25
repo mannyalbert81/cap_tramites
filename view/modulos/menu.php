@@ -47,27 +47,10 @@ $controladores=$_SESSION['controladores'];
                   <li style="<?php echo getcontrolador("MenuProcesos",$controladores) ?>"><a><i class="fa fa-edit"></i> Procesos <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li style="<?php echo getcontrolador("Turnos",$controladores) ?>"><a href="index.php?controller=Turnos&action=index">Turnos</a></li>
-                      
+                      <li style="<?php echo getcontrolador("TurnoTramitesDetalle",$controladores) ?>"><a href="index.php?controller=TurnoTramitesDetalle&action=index">Actualización de Trámites</a></li>
                       <li style="<?php echo getcontrolador("Pantalla",$controladores) ?>"><a href="index.php?controller=Pantalla&action=index">Pantalla</a></li>
                       
                       
-                    </ul>
-                  </li>
-                  <li style="<?php echo getcontrolador("MenuInformes",$controladores) ?>"><a><i class="fa fa-edit"></i> Informes <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li style="<?php echo getcontrolador("Categorias",$controladores) ?>"><a href="index.php?controller=Categorias&action=ReporteTotal" target="blank">Documentos por Categorías</a></li>
-                      <li style="<?php echo getcontrolador("Categorias",$controladores) ?>"><a href="index.php?controller=SubCategorias&action=ReporteTotal" target="blank">Documentos por Subcategrorías</a></li>
-                      <li style="<?php echo getcontrolador("Documentos",$controladores) ?>"><a href="index.php?controller=Documentos&action=BuscaxCarton">Documentos por Cartón</a></li>
-                      <li style="<?php echo getcontrolador("Documentos",$controladores) ?>"><a href="index.php?controller=CartonDocumentos&action=ReporteTotal" target="blank">Listado de Cartones Registrados</a></li>
-                      <li tyle="<?php echo getcontrolador("Documentos",$controladores) ?>"><a href="index.php?controller=CartonDocumentos&action=FechaCartones" target="blank"">Listado de Cartones con Rangos de Fechas</a></li>
-                      
-                    </ul>
-                  </li>
-                  <li style="<?php echo getcontrolador("MenuUtilitarios",$controladores) ?>"><a><i class="fa fa-edit"></i>Utilitarios <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li style="<?php echo getcontrolador("Documentos",$controladores) ?>"><a href="index.php?controller=Documentos&action=ActualizarDocumentos">Actualizar Documentos</a></li>
-                      <li style="<?php echo getcontrolador("Documentos",$controladores) ?>"><a href="index.php?controller=VerificarCapremci&action=index">Verificar Capremci</a></li>
-                      <li style="<?php echo getcontrolador("ErroresImportacion",$controladores) ?>"><a href="index.php?controller=ErroresImportacion&action=index">Errores Importacion</a></li>
                     </ul>
                   </li>
                   
