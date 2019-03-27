@@ -39,6 +39,7 @@ $controladores=$_SESSION['controladores'];
                       <li style="<?php echo getcontrolador("Roles",$controladores) ?>"><a href="index.php?controller=Roles&action=index">Roles de Usuario</a></li>
                       <li style="<?php echo getcontrolador("PermisosRoles",$controladores) ?>"><a href="index.php?controller=PermisosRoles&action=index">Permisos Roles</a></li>
                       <li style="<?php echo getcontrolador("EstadoTramites",$controladores) ?>"><a href="index.php?controller=EstadoTramites&action=index">Registro Estado Trámites</a></li>
+                      
                       <li style="<?php echo getcontrolador("Departamentos",$controladores) ?>"><a href="index.php?controller=Departamentos&action=index">Registro Departamentos</a></li>
                       <li style="<?php echo getcontrolador("Empleados",$controladores) ?>"><a href="index.php?controller=Empleados&action=index">Registro Empleados</a></li>
                     
@@ -48,6 +49,7 @@ $controladores=$_SESSION['controladores'];
                     <ul class="nav child_menu">
                       <li style="<?php echo getcontrolador("Turnos",$controladores) ?>"><a href="index.php?controller=Turnos&action=index">Turnos</a></li>
                       <li style="<?php echo getcontrolador("TurnoTramitesDetalle",$controladores) ?>"><a href="index.php?controller=TurnoTramitesDetalle&action=index">Actualización de Trámites</a></li>
+                      <li style="<?php echo getcontrolador("TurnoTramitesDetalle",$controladores) ?>"><a href="index.php?controller=ConsultaTramitesDetalle&action=index">Consulta de Trámites</a></li>
                       <li style="<?php echo getcontrolador("Pantalla",$controladores) ?>"><a href="index.php?controller=Pantalla&action=index">Pantalla</a></li>
                       
                       
