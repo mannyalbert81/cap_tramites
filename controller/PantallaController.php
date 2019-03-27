@@ -26,7 +26,7 @@ class PantallaController extends ControladorBase{
 		$tablas   = "public.empleados, public.turnos_tramites, public.departamentos";
 		$where    = "turnos_tramites.id_departamentos = departamentos.id_departamentos AND turnos_tramites.id_empleados = empleados.id_empleados AND turnos_tramites.id_estado=2";
 		$id       = "turnos_tramites.numero_turnos_tramites";
-		$limit ="LIMIT 8";
+		$limit ="LIMIT 6";
 			
 	
 		$resultSet = $turnos_tramites->getCondicionesDesc($columnas ,$tablas ,$where, $id, $limit);
