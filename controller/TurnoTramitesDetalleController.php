@@ -140,28 +140,26 @@ class TurnoTramitesDetalleController extends ControladorBase{
 				
 				$resultSet = $turnos->getCondiciones($columnas ,$tablas , $where, $id);
 				
-			
+				
+				
 				
 			}
 			
-			if (isset ($_POST["id_turno_tramites"]) && isset($_POST["btnGuardar"]) )
+			if (isset ($_POST["id_turnos_tramites"])  && isset($_POST["btnGuardar"]) )
 			{
-				$_id_usuario = $_SESSION['id_usuario'];
-				$_id_turnos_tramites = $_POST["id_turno_tramites"];
-				$_id_estado_tramites = $_POST["id_estado_tramites"];
+			
 				
+				$_id_turno_tramites = $_POST["id_turnos_tramites"];
+				$_id_estado_tramites = $_POST["id_estado_tramites"];
 				$_descripcion_turno_tramites_detalle =  $_POST["descripcion_turno_tramites_detalle"];
+				$_id_usuario = $_SESSION['id_usuario'];
 				
 				$funcion = "ins_turno_tramites_detalle";
 				$parametros = " '$_id_turno_tramites' ,'$_id_estado_tramites' , '$_descripcion_turno_tramites_detalle', '$_id_usuario'";
-				$usuarios->setFuncion($funcion);
-				$usuarios->setParametros($parametros);
-				$resultado=$usuarios->Insert();
-					
-				
-			
+				$estado_tramites->setFuncion($funcion);
+				$estado_tramites->setParametros($parametros);
+				$resultado=$estado_tramites->Insert();
 			}
-			
 			
 			
 			$this->view("TurnoTramitesDetalle",array(

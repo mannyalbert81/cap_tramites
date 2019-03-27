@@ -84,12 +84,18 @@
             <form  action="<?php echo $helper->url("TurnoTramitesDetalle","InsertaTurnoTramitesDetalle"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-12 col-md-12 col-xs-12">
              
              <?php if (!empty($resultEdit) ){?>
+            		
+            		<?php foreach($resultEdit as $res) {?>
+            			<?php $res_id_turnos_tramites = $res->id_turnos_tramites; ?>
+            			
+            		 <?php } ?>
+            		
             		<div class="panel panel-info">
 	         			<div class="panel-heading">
 	         				<h4><i class='glyphicon glyphicon-edit'></i>Actualizar Trámite</h4>
 	         			</div>
 	        			 <div class="panel-body">
-                               
+                              <input type="hidden" class="form-control" id="id_turnos_tramites" name="id_turnos_tramites" value="<?php echo $res_id_turnos_tramites; ?>"  placeholder="" > 
                               <div class="col-lg-4 col-xs-6 col-md-4">
                     		  <div class="form-group">
                                                   <label for="estado_tramites" class="control-label">Estado Trámites:</label>
