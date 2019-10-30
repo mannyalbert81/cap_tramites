@@ -22,9 +22,15 @@ class PantallaController extends ControladorBase{
 		$i=0;
 		$turnos_tramites = new TurnosTramitesModel();
 	
+		
+		date_default_timezone_set('America/Guayaquil');
+		$fechaActual = date('Y-m-d');
+		
+		
 		$columnas = " empleados.modulo_empleados, turnos_tramites.numero_turnos_tramites ";
 		$tablas   = "public.empleados, public.turnos_tramites, public.departamentos";
-		$where    = "turnos_tramites.id_departamentos = departamentos.id_departamentos AND turnos_tramites.id_empleados = empleados.id_empleados AND turnos_tramites.id_estado=2";
+		$where    = "turnos_tramites.id_departamentos = departamentos.id_departamentos AND turnos_tramites.id_empleados = empleados.id_empleados AND turnos_tramites.id_estado=2
+                     AND date(turnos_tramites.creado) between '$fechaActual' and '$fechaActual'";
 		$id       = "turnos_tramites.numero_turnos_tramites";
 		$limit ="LIMIT 6";
 			

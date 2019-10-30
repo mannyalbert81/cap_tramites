@@ -140,16 +140,18 @@
 	<script type="text/javascript">
 	
 	  $(document).ready( function (){
-		  video();
+
+		  	video();
 		  
 			});
-	
-	function video(){
-		 
-		imgficha = 'view/videos/bienvenido_capremci.mp4';
 
-		$("#reproducir_video").attr({'src':imgficha});
-	 
+
+		
+	function video(){
+
+			    imgficha = 'view/videos/INFORME DE GESTION-2018.mp4';
+
+		        $("#reproducir_video").attr({'src':imgficha});
 	}
 	
 	setInterval(video, 40000);

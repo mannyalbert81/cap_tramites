@@ -322,7 +322,7 @@ class TurnosController extends ControladorBase{
 	
 			$empleados=new EmpleadosModel();
 	
-			$resultEmp = $empleados->getBy("id_departamentos = '$id_departamentos'");
+			$resultEmp = $empleados->getBy("id_departamentos = '$id_departamentos' AND id_estado=1");
 	
 		}
 		
